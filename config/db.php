@@ -1,11 +1,9 @@
 <?php
 $db_host = 'localhost';
-$db_name = 'np03cs4s240161';
-$db_user = 'np03cs4s240161';
-$db_pass = 'YXTRdLGSsM';
-// $db_name = 'luminalib_db';
-// $db_user = 'root';
-// $db_pass = '';
+
+$db_name = 'luminalib_db';
+$db_user = 'root';
+$db_pass = '';
 
 try {
     // 1. Initial connection to MySQL (without selecting a DB)

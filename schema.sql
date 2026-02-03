@@ -10,9 +10,14 @@ CREATE TABLE roles (
 -- Users table
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
     username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100),
+    phone VARCHAR(20),
     password_hash VARCHAR(255) NOT NULL,
     role_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
@@ -37,9 +42,34 @@ CREATE TABLE books (
     author_id INT,
     category_id INT,
     publish_year INT,
-    status ENUM('Available', 'Issued') DEFAULT 'Available',
+    image_path VARCHAR(255),
+    status ENUM('Available', 'Pending', 'Issued') DEFAULT 'Available',
     FOREIGN KEY (author_id) REFERENCES authors(id),
     FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+-- Bookings table
+CREATE TABLE bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    book_id INT,
+    booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('Pending', 'Approved', 'Rejected', 'Returned') DEFAULT 'Pending',
+    purpose VARCHAR(100),
+    duration VARCHAR(50),
+    message TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (book_id) REFERENCES books(id)
+);
+
+-- Logs table
+CREATE TABLE logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    action VARCHAR(255),
+    ip_address VARCHAR(45),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 -- Sample Data

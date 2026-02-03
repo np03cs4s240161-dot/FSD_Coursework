@@ -2199,9 +2199,7 @@ select option {
     /* Optional: keep or remove based on preference, keeping for status */
 }
 
-.status-tag {
-    /* Specific overrides if needed */
-}
+
 
 .card-image .status-tag {
     position: absolute;
